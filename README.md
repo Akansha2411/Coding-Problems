@@ -1,2 +1,2 @@
 # Coding-Problems
-Topics to cover before intervies : Some important coding problems.
+Topics to cover before interviews : Some important coding problems.
