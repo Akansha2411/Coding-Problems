@@ -1,0 +1,85 @@
+/*Sliding Window Algorithm to Find K-Length Substrings With No Repeated Characters,
+Given a string S, return the number of substrings of length K with no repeated characters.
+
+Example 1:
+Input: S = “havefunonleetcode”, K = 5
+Output: 6
+Explanation:
+There are 6 substrings they are : ‘havef’,’avefu’,’vefun’,’efuno’,’etcod’,’tcode’.
+
+Example 2:
+Input: S = “home”, K = 5
+Output: 0
+Explanation:
+Notice K can be larger than the length of S. In this case is not possible to find any substring.
+
+Note:
+1 <= S.length <= 10^4
+All characters of S are lowercase English letters.
+1 <= K <= 10^4 */
+//Problem statement given above.
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t;cin>>t;
+    while(t--)
+    {
+        string s;cin>>s; //acaba
+        int n = s.size(); //5
+        int k;cin>>k;//3
+        if(k<=n)
+        {
+            bool present[26];
+            int count=0;bool flag = true;
+            fill(present,present+26,false);
+            //[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            string str(k,'*'); //declaring a string of size k and initializing it with random value
+           // fill(str.begin(),str.begin()+k,'a');
+            for(int i=0;i<k;i++)
+            {
+                str[i]=s[i]; //str = aca
+            }
+            //cout<<str<<'\n';
+            for(int i=0;i<k;i++)
+            {
+                if(present[str[i]-'a']) 
+                {
+                    flag = false;
+                }
+                present[str[i]-'a']=true;
+            }
+            //for(int i=0;i<26;i++)cout<<present[i];cout<<" ";
+            //cout<<flag;
+            if(flag == true)count++;
+            //cout<<count;
+            for(int i=k;i<n;i++)
+            {
+                flag = true;
+                fill(present,present+26,false);
+                //for(int i=0;i<26;i++)cout<<present[i];
+                str+=s[i];
+                str.erase(str.begin());
+                //cout<<str<<'\n';
+                for(int i=0;i<k;i++)
+                {
+                    if(present[str[i]-'a'])
+                    {
+                        flag = false;
+                    }
+                    present[str[i]-'a']=true;
+                }
+                //for(int i=0;i<26;i++)cout<<present[i];
+                //cout<<flag<<'\n';
+                if(flag == true)count++;
+            }
+        cout<<count;
+        }
+        else cout<<"Impossible";
+        cout<<'\n';
+    }
+    return 0;
+}
+
