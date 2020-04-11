@@ -1,0 +1,110 @@
+/*Given an array of integers A sorted in non-decreasing order, return an array of the squares of each number, also in sorted non-decreasing order.
+
+ 
+
+Example 1:
+
+Input: [-4,-1,0,3,10]
+Output: [0,1,9,16,100]
+Example 2:
+
+Input: [-7,-3,2,3,11]
+Output: [4,9,9,49,121]*/
+
+//My solution :
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& A) 
+    {
+       // sort(A.begin(),A.end());
+        for(int i=0;i<A.size();i++)
+        {
+            A[i]*=A[i];
+        }
+        sort(A.begin(),A.end());
+        return A;
+    }
+}; //O(nlogn) approach,
+
+/* O(n) approach :Since the array A is sorted, loosely speaking it has some negative elements with squares in decreasing order, then some non-negative elements with squares in increasing order.
+
+For example, with [-3, -2, -1, 4, 5, 6], we have the negative part [-3, -2, -1] with squares [9, 4, 1], and the positive part [4, 5, 6] with squares [16, 25, 36]. Our strategy is to iterate over the negative part in reverse, and the positive part in the forward direction.
+/*
+// C++ program to Sort square of the numbers of the array 
+#include<bits/stdc++.h> 
+using namespace std; 
+
+// function to sort array after doing squares of elements 
+void sortSquares(int arr[], int n) 
+{ 
+	// first dived array into part negative and positive 
+	int K = 0; 
+	for (K = 0 ; K < n; K++) 
+		if (arr[K] >= 0 ) 
+			break; 
+
+	// Now do the same process that we learn 
+	// in merge sort to merge to two sorted array 
+	// here both two half are sorted and we traverse 
+	// first half in reverse meaner because 
+	// first half contain negative element 
+	int i = K-1; // Initial index of first half 
+	int j = K; // Initial index of second half 
+	int ind = 0; // Initial index of temp array 
+
+	// store sorted array 
+	int temp[n]; 
+	while (i >= 0 && j < n) 
+	{ 
+		if (arr[i] * arr[i] < arr[j] * arr[j]) 
+		{ 
+			temp[ind] = arr[i] * arr[i]; 
+			i--; 
+		} 
+		else
+		{ 
+			temp[ind] = arr[j] * arr[j]; 
+			j++; 
+		} 
+		ind++; 
+	} 
+
+	/* Copy the remaining elements of first half */
+	while (i >= 0) 
+	{ 
+		temp[ind] = arr[i] * arr[i]; 
+		i--; 
+		ind++; 
+	} 
+
+	/* Copy the remaining elements of second half */
+	while (j < n) 
+	{ 
+		temp[ind] = arr[j] * arr[j]; 
+		j++; 
+		ind++; 
+	} 
+
+	// copy 'temp' array into original array 
+	for (int i = 0 ; i < n; i++) 
+		arr[i] = temp[i]; 
+} 
+
+// Driver program to test above function 
+int main() 
+{ 
+	int arr[] = { -6 , -3 , -1 , 2 , 4 , 5 }; 
+	int n = sizeof(arr)/sizeof(arr[0]); 
+
+	cout << "Before sort " << endl; 
+	for (int i = 0; i < n; i++) 
+		cout << arr[i] << " " ; 
+	sortSquares(arr, n); 
+
+	cout << "\nAfter Sort " << endl; 
+	for (int i = 0 ; i < n ; i++) 
+		cout << arr[i] << " " ; 
+
+	return 0; 
+} 
+*/
