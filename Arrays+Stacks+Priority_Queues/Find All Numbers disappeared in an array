@@ -34,3 +34,6 @@ public:
         
     }
 };
+
+//O(1) solution :
+
