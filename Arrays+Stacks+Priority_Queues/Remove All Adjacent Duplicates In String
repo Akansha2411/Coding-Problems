@@ -34,3 +34,32 @@ public:
         
     }
 };
+
+
+//Stack solution :
+#include<bits/stdc++.h>
+using namespace std;
+ 
+
+int main()
+{
+        string S;cin>>S;
+        stack<char> s;
+        string str = "ca";
+        s.push(S[0]);
+        for(int i=1;i<S.size();i++)
+        {
+            if(!s.empty() && S[i] == s.top())
+            {
+                s.pop();
+            }
+            else s.push(S[i]);
+        }
+        while(!s.empty())
+        {
+            cout<<s.top();
+            s.pop();
+        }
+    
+}
+
