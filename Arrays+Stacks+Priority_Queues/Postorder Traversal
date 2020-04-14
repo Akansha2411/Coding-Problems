@@ -1,1 +1,45 @@
-
+//Iterative solution :
+vector<int> postorderTraversal(TreeNode* root) {
+        if (root == nullptr) return {}; 
+        TreeNode* p = root, *q = p; 
+        stack<TreeNode*> stk({root});
+        vector<int> ans; 
+        while (!stk.empty()) {
+            p = stk.top(); 
+            while ((p->left || p->right) && p->left != q && p->right != q) {
+                if (p->right) stk.push(p->right); 
+                if (p->left) stk.push(p->left); 
+                p = stk.top(); 
+            }
+            q = stk.top(); 
+            ans.push_back(stk.top()->val); stk.pop(); 
+        }
+        return ans; 
+    }
+    
+    //Recursive solution
+    /**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) 
+    {
+        vector<int> res;
+        recursive(root,res);
+        return res;
+    }
+    void recursive(TreeNode* root,vector<int> &res)
+    {
+        if(root == NULL) return;
+        recursive(root->left,res);
+        recursive(root->right,res);
+        res.push_back(root->val);
+    }
+};
