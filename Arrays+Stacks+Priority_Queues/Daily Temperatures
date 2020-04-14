@@ -29,3 +29,37 @@ public:
         
     }
 };
+
+
+/* O(n) solution : One thing that is usually true is: If an algorithm is improvable, then there must be some redundancy in the way we process the data. How to find the redundancy? Let’s make same examples and find the pattern in it.
+Let’s say the temperature is [68, 69, 71, 70, 69, 72, 69, 68, 70].
+For the first day, we can easily find the next day to be the first warmer day. Same for the second day. We are pretty happy about it, since we only need to check once for each day.
+Then some thing weird happens: From the third day to the fifth, the temperature keeps decreasing. For the third day, the first warmer day is the sixth day; For the fourth day, the first warmer day is the sixth day; For the fifth day, the first warmer day is the sixth day.
+Wait, is there some information we can compress? If the weather keeps decreasing, then the first warmer day for the first day is the first warmer day for every day in the decreasing sequence! So once we find the first warmer day, we can find the first warmer day for the whole sequence.
+Wait, Wait, Wait, what about this one?
+[74, 72, 69, 68, 70]
+70 is the next higher temperature for 68 and 69, but not for 74 and 72. We still need to keep searching for the next warmer day for 74, 72, as well as 70. Once we find a warmer day, there are some days we don’t need to keep track of anymore. If we take a look at the tracking list:
+[74, 72]
+[74, 72, 69]
+[74, 72, 69, 68]
+[74, 72, 70]
+What do we find?
+We are maintaining a list, more precisely a stack. And all the temperatures in the stack is in the decreasing order. Iterating through the given list, we compare the current temperature with the temperature on top of the stack (namely the last one in the list), if smaller, we append it to the stack; else, we pop out the stack until it’s empty or the top element is larger than the current value.*/
+
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& T) {
+        stack<int> s;
+        vector<int> ans(T.size(),0);
+        for(int i=0;i<T.size();i++)
+        {
+            while(!s.empty() && T[s.top()]<T[i])
+            {
+                ans[s.top()]=i-s.top();
+                s.pop();
+            }
+            s.push(i);
+        }
+        return ans;
+    }
+};
