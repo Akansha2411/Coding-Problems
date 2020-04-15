@@ -1,0 +1,39 @@
+/* Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+
+You may assume no duplicates in the array.
+
+Example 1:
+
+Input: [1,3,5,6], 5
+Output: 2
+Example 2:
+
+Input: [1,3,5,6], 2
+Output: 1
+Example 3:
+
+Input: [1,3,5,6], 7
+Output: 4
+Example 4:
+
+Input: [1,3,5,6], 0
+Output: 0 */
+
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) 
+    {
+        vector<int>::iterator it = lower_bound(nums.begin(),nums.end(),target);
+        return (it - nums.begin());
+        
+    }
+};
+
+/*Parameters: The above methods accept the following parameters.
+
+first, last: The range used is [first, last), which contains all the elements between first and last, including the element pointed by first but not the element pointed by last.
+val: Value of the lower bound to be searched for in the range.
+comp: Binary function that accepts two arguments (the first of the type pointed by ForwardIterator, and the second, always val), and returns a value convertible to bool. The function shall not modify any of its arguments. This can either be a function pointer or a function object.
+Return Value: An iterator to the lower bound of val in the range. If all the elements in the range compare less than val, the function returns last. If all the elements in the range are larger than val, the function returns a pointer to the first element.*/
+
+//Or do backend implementation of lower_bound()
