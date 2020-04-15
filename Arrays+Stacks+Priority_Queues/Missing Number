@@ -1,0 +1,62 @@
+/* Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
+
+Example 1:
+
+Input: [3,0,1]
+Output: 2
+Example 2:
+
+Input: [9,6,4,2,3,5,7,0,1]
+Output: 8 */
+
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) 
+    {
+        int n= nums.size();
+        //int sum = (n*(n+1))/2;  //this can lead to overflow
+        int sum_a=0;
+        for(int i=0;i<n;i++)sum_a+=(i+1)-nums[i]; //hence addition and subtraction done in same step to avoid overflow.
+        return (sum_a);
+        
+    }
+};
+
+/* This method uses the technique of XOR to solve the problem.
+
+Approach:
+XOR has certain properties
+Assume a1 ^ a2 ^ a3 ^ …^ an = a and a1 ^ a2 ^ a3 ^ …^ an-1 = b
+Then a ^ b = an
+Using this property, the missing element can be found. Calculate XOR of all the natural number from 1 to n and store it as a. Now calculate XOR of all the elements of the array and store it as b. The missing number will be a ^ b.
+^ is XOR operator.
+#include <bits/stdc++.h> 
+using namespace std; 
+
+// Function to get the missing number 
+int getMissingNo(int a[], int n) 
+{ 
+	// For xor of all the elements in array 
+	int x1 = a[0]; 
+
+	// For xor of all the elements from 1 to n+1 
+	int x2 = 1; 
+
+	for (int i = 1; i < n; i++) 
+		x1 = x1 ^ a[i]; 
+
+	for (int i = 2; i <= n + 1; i++) 
+		x2 = x2 ^ i; 
+
+	return (x1 ^ x2); 
+} 
+
+// Driver Code 
+int main() 
+{ 
+	int arr[] = { 1, 2, 4, 5, 6 }; 
+	int n = sizeof(arr) / sizeof(arr[0]); 
+	int miss = getMissingNo(arr, n); 
+	cout << miss; 
+} 
+*/
