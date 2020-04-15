@@ -1,0 +1,44 @@
+/* Given two arrays, write a function to compute their intersection.
+
+Example 1:
+
+Input: nums1 = [1,2,2,1], nums2 = [2,2]
+Output: [2]
+Example 2:
+
+Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+Output: [9,4]
+Note:
+
+Each element in the result must be unique.
+The result can be in any order. */
+
+//My solution : O(nlogn) TC and O(n) space complexity
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) 
+    {
+        map<int,int>mp;
+        vector<int> res;
+        for(int i=0;i<nums1.size();i++)mp[nums1[i]]++; //using map for matching
+        for(int i=0;i<nums2.size();i++)
+        {
+            if(mp.find(nums2[i])!=mp.end())res.push_back(nums2[i]);
+        }
+        int j=1;
+        sort(res.begin(),res.end()); //sort array and remove duplicates.
+        if(res.size()>0)
+        {
+           for(int i=1;i<res.size();i++)
+           {
+             if(res[i]!=res[i-1])
+             {res[j] = res[i];j++;}
+           } 
+            res.erase(res.begin()+j,res.end());
+        }
+        
+        
+        return res;
+        
+    }
+};
