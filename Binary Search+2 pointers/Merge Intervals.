@@ -1,5 +1,5 @@
 /* https://leetcode.com/problems/merge-intervals/
-Given a collection of intervals, merge all overlapping intervals.
+Given a collection of intervals, merge all overlapping intervals. //Try a dry run to understand the code.
 
 Example 1:
 
@@ -36,7 +36,7 @@ public:
             {
                 ans.insert(ans.end(),{a,b}); //syntax is vector_name.insert (position, val)
                 a=-1,b=-1;
-                i--;
+                i--; 
             }
         }
     }
