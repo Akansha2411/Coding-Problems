@@ -20,6 +20,14 @@ Output: true */
  */
  
  //Algo :  Traverse ll and store everything in stack. Then traverse ll again compare with the top element of the stack.
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution 
 {
 public:
@@ -35,19 +43,19 @@ public:
             s.push(temp->val);
             temp = temp->next;
         }
-        //temp = head;
+        temp = head;
         
         int i;
-        while(head != NULL)
+        while(temp != NULL)
         {
             i = s.top();
             s.pop();
-            if(i != head->val)
+            if(i != temp->val)
             {
                 flag = false;
                 break;
             }
-            head = head->next;
+            temp = temp->next;
         }
         return flag;
     }
