@@ -1,0 +1,36 @@
+/* https://leetcode.com/problems/valid-palindrome/submissions/
+Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+Note: For the purpose of this problem, we define empty string as valid palindrome.
+
+Example 1:
+
+Input: "A man, a plan, a canal: Panama"
+Output: true
+Example 2:
+
+Input: "race a car"
+Output: false */
+
+class Solution {
+public:
+    bool isPalindrome(string s) 
+    {
+       int left = 0,right = s.size()-1;bool flag = true;
+       while(left<=right)
+       {
+           if(!isalnum(s[left]))left++;
+           else if(!isalnum(s[right]))right--; //isalnum checks whether a given character is alphanumeric or not.
+           else if(toupper(s[right])!=toupper(s[left]) )
+                   {
+                       flag = false;
+                       break;
+                   }
+           else 
+            {
+                       right--;left++;
+            }
+       }
+                   return flag;
+    }
+};
